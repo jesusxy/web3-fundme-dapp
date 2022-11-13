@@ -1,0 +1,122 @@
+.CreateFundraiser {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: fit-content;
+  min-height: calc(100% - 50px);
+  padding: 20px;
+  padding-bottom: 50px;
+
+  margin-top: 1.5rem;
+}
+
+.CreateFundraiser__form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: 
+    "hostname title"
+    "goalamount date"
+    "recipient recipient"
+    "description description"
+    "submit submit";
+  grid-gap: 1.5rem;
+  justify-items: stretch;
+}
+
+.CreateFundraiser__grid-item {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+
+  input,
+  textarea {
+    box-sizing: inherit;
+    font-size: 1rem;
+    min-width: 350px;
+    padding: 1rem;
+    border: 1px solid #5dadaa;
+    border-radius: 0.5rem;
+  }
+
+  &:focus,
+  &:hover {
+    box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.CreateFundraiser__hostname {
+  grid-area: hostname;
+}
+
+.CreateFundraiser__title {
+  grid-area: title;
+}
+
+.CreateFundraiser__goalAmount {
+  grid-area: goalamount;
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-inner-spin-button: none;
+    margin: 0;
+  }
+
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+}
+
+.CreateFundraiser__date {
+  grid-area: date;
+}
+
+.CreateFundraiser__recipient {
+  grid-area: recipient;
+}
+
+.CreateFundraiser__description {
+  grid-area: description;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  width: 100%;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.CreateFundraiser__submit {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-area: submit;
+  width: 100%;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  background-color:#5dadaa;
+  cursor: pointer;
+}
+
+.CreateFundraiser__error-message {
+  font-size: 1rem;
+  text-align: center;
+  width: 100%;
+  align-self: flex-start;
+  margin-top: 5px;
+}
+
+section {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h1 {
+    text-align: center;
+  }
+}

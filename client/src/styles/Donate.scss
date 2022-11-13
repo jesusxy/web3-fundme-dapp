@@ -1,0 +1,143 @@
+.DonateView {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  padding: 20px;
+  padding-bottom: 50px;
+  margin-top: 70px;
+}
+
+.DonateView__card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  min-height: 55vh;
+  width: calc(100% - 600px);
+  background-color: white;
+  padding: 2rem;
+  border-radius: 1rem;
+
+  box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+.DonateView__card-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 3;
+  padding-right: 30px;
+}
+
+
+.DonateView__card-title {
+  font-size: 2.2rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+.DonateView__card-description {
+  text-align: justify;
+  font-size: 1.2rem;
+  max-height: 50vh;
+  overflow-y: scroll;
+  padding-right: 7px;
+  margin-bottom: 1rem;
+}
+
+.DonateView__card-input {
+  border: 2px solid #fff;
+  border-radius: 0.5rem;
+  color: #5dadaa;
+  font-weight: 600;
+  border: 2px solid lightgray;
+  padding: 0.5rem 1rem;
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  text-align: center;
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-inner-spin-button: none;
+    margin: 0;
+  }
+
+  &::placeholder {
+    color: black;
+    opacity: 0.4;
+    font-weight: 500;
+  }
+
+  &:focus {
+    border: 2px solid #5dadaa;
+  }
+
+  &.active {
+    border: 2px solid #5dadaa;
+  }
+}
+
+.DonateView__card-right {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.DonateView__card-top {
+  text-align: right;
+}
+
+.DonateView__card-host {
+  font-size: 1.6rem;
+  span {
+    font-weight: 600;
+  }
+}
+
+.DonateView__card-recipient {
+  font-size: 0.9rem;
+}
+
+.DonateView__card-bottom {
+  margin-top: 200px;
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    span {
+      color: red;
+    }
+  }
+}
+
+.DonateView__submit {
+  font-size: 1.4rem;
+  font-weight: 600;
+  background: #ff7468;
+  color: #fff;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.3rem;
+  border: none;
+  margin-top: 0.7rem;
+  cursor: pointer;
+}
+
+.DonateView__card-goalAmount,
+.DonateView__card-expiry {
+  font-weight: 600;
+  color: #ff7468
+}
+
+.DonateView__card-details {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  text-align: right;
+}
+
+.DonateView__card-donors {
+  span {
+    color: #ff7468
+  }
+}
