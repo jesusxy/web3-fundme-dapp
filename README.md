@@ -33,5 +33,6 @@ If the goal amount is reached before the expiry date, the collected funds are tr
 - Run ``npm install`` in root directory to install dev dependencies.
 - ``cd client/`` to navigate into Front-End directory and run ``npm install`` to install all required node_modules for React App
 - Run ``npm run start`` in client directory to start the React App
+- Open [http://localhost:3000](http://localhost:3000) in Browser to view the result
 
 ## Demo
