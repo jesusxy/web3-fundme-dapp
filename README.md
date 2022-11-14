@@ -22,9 +22,9 @@ If the goal amount is reached before the expiry date, the collected funds are tr
   - Create Fundraiser 
 
 ## Future Upgrades | What I would do differently
-- Categorize fundraiers
+- Categorize fundraisers
   - Browse by category
-- Show log of recent donations for Fundraiser
+- Show log of recent donations to Fundraiser
 - Make this a DAO in order to ensure security and provide a way to ban malicious actors out. 
   - Verify that funds are being used for its intended purpose.
 
