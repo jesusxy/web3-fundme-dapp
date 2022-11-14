@@ -9,7 +9,7 @@ const Home = ({provider}) => (
   <>
     <div className="Home">
       <div className="Home__content">
-        <h1 className="Home__content-title">Web3 Fundm3</h1>
+        <h1 className="Home__content-title">Web3 FundMe</h1>
         <Wallet />
       </div>
     </div>

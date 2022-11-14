@@ -3,7 +3,9 @@ import React, { useState, useContext, useEffect } from "react";
 import Fundraiser_ABI from "../../contract-builds/Fundraiser.json";
 import Loader from "../../components/Loader";
 import { Context } from "../../Context";
-import Card from "./components/Card";
+import FundraiserCard from "./components/Card";
+
+import "../../styles/FundraisersView.scss";
 
 const FundraisersView = () => {
   const [fundraiserDetails, setFundraiserDetails] = useState([]);
@@ -46,7 +48,7 @@ const FundraisersView = () => {
 
   const fundraiserCards = fundraiserDetails.map((fundraiser, i) => {
     return (
-      <Card
+      <FundraiserCard
         key={i}
         id={fundraiser.fundraiserAddress}
         title={fundraiser.title}
@@ -59,13 +61,27 @@ const FundraisersView = () => {
   });
 
   return (
-    <>
-      <div className="Fundraisers">
-        <div className="Fundraisers__list">
-          <Card />
+    <div>
+      <div className="FundraisersView">
+        <div className="FundraisersView__browse">
+          <div className="FundraisersView__browse-inner">
+            <h1>Browse Fundraisers</h1>
+            <div>
+              People around the world are raising money for what they are
+              passionate about.
+            </div>
+          </div>
         </div>
       </div>
-    </>
+      <div className="FundraisersView__content">
+        <div className="FundraisersView__content-inner">
+          <div className="FundraisersView__cell">
+            <h2 className="FundraisersView__inner-title">Top Fundraisers</h2>
+            <FundraiserCard />
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

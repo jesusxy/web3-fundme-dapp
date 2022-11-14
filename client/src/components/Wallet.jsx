@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { ethers } from "ethers";
 
+import Button from "react-bootstrap/Button";
+
 //import "../styles/Wallet.scss";
 
 const Wallet = ({ provider }) => {
@@ -27,7 +29,7 @@ const Wallet = ({ provider }) => {
   };
 
   return (
-    <div>
+    <div className="mt-5">
       {isConnected ? (
         <div>
           <span>
@@ -36,14 +38,18 @@ const Wallet = ({ provider }) => {
           </span>
         </div>
       ) : (
-        <div>
-            <span>
-                Please Connect your wallet to donate.
-            </span>
-            <button onClick={connectWallet}>Connect Wallet</button>
-            {errorMessage && (
-                <span>Error: { errorMessage }</span>
-            )}
+        <div className="mt-4">
+          <span>Please Connect your wallet to begin donating.</span>
+          <div className="ml-2 mt-3">
+            <Button
+              variant="outline-light"
+              size="md"
+              onClick={connectWallet}
+            >
+              Connect Wallet
+            </Button>
+          </div>
+          {errorMessage && <span>Error: {errorMessage}</span>}
         </div>
       )}
     </div>

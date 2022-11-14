@@ -1,0 +1,57 @@
+.FundraisersView {
+    padding: 4rem 1rem;
+    margin-top: 4rem;
+    display: block;
+}
+
+.FundraisersView__browse {
+    width: 60rem;
+    margin: 0 auto;
+}
+
+.FundraisersView__browse-inner {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-flow: row wrap;
+    width: 83%;
+    
+    > h1 {
+        font-size: 2.5rem;
+        line-height: 3rem;
+        font-weight: 900;
+    }
+}
+
+.FundraisersView__content {
+    background-color: #fbf8f6;
+    height: 100vh;
+    padding: 4rem 1rem;
+}
+
+.FundraisersView__content-inner {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    max-width: 72rem;
+    margin: 0 auto;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.FundraisersView__inner-title {
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+    line-height: 2.5rem;
+    font-weight: 900;
+    text-align: left;
+}
+
+.FundraisersView__cell {
+    flex: 0 0 auto;
+    width: 83.33333%;
+    flex-basis: auto;
+    min-width: 0;
+    min-height: 0;
+    display: block;
+}

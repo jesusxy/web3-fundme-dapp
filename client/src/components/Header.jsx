@@ -2,6 +2,8 @@ import React from "react"
 import { Link } from "react-router-dom"
 import logo from "./../assets/eth.png"
 
+import Button from "react-bootstrap/Button";
+
 import "../styles/Header.scss";
 
 const Header = () => (
@@ -23,7 +25,7 @@ const Header = () => (
             </div>
             <div className="Header__nav-right">
                 <Link to="/create">
-                    <button>Create a Fundraiser</button>
+                    <Button variant="outline-light" size="sm">Start a Fundraiser</Button>
                 </Link>
             </div>
         </div>

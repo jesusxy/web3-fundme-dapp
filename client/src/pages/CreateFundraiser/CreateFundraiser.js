@@ -3,8 +3,11 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
+import Container from 'react-bootstrap/Container';
+
 import useFundraiserContract from "../../hooks/useFundraiserContract";
 import TxnLoader from "../../components/TxnLoader";
+import Button from "react-bootstrap/Button";
 import "../../styles/CreateFundraiser.scss";
 
 import { ethers } from "ethers";
@@ -111,7 +114,7 @@ const CreateFundraiserView = (props) => {
       {isTxnLoading && <TxnLoader />}
       <div className="CreateFundraiser">
         <section>
-          <h1>Create a Fundraiser</h1>
+          <h1 className="mb-4">Create a Fundraiser</h1>
           <form
             onSubmit={handleSubmit(onCreateSubmit)}
             className="CreateFundraiser__form"
@@ -178,8 +181,8 @@ const CreateFundraiserView = (props) => {
               ></textarea>
               {errors.description && <span>{errors.description.message}</span>}
             </div>
-            <div className="CreateFundraiser__submit">
-              <button type="submit">Create</button>
+            <div className="d-grid gap-2">
+              <Button type="submit" size="lg">Create</Button>
             </div>
           </form>
         </section>
