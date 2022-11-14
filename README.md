@@ -36,3 +36,8 @@ If the goal amount is reached before the expiry date, the collected funds are tr
 - Open [http://localhost:3000](http://localhost:3000) in Browser to view the result
 
 ## Demo
+
+https://user-images.githubusercontent.com/53798994/201743888-d10a146c-10f6-44f0-b72b-994e7bcfd58f.mp4
+
+
+
