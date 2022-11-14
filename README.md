@@ -1,13 +1,6 @@
-# Sample Hardhat Project
+# Web3 FundMe dApp
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
+The application essentially provides a decentralized platform where users can create Fundraisers by adding the required details and they can also donate to the existing Fundraisers. 
 
-Try running some of the following tasks:
-
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.ts
-```
+The donation amount is stored in the smart-contract until the goal set by the organizer is reached or the expiry date set by the organizer has passed. 
+If the goal amount is reached before the expiry date, the collected funds are transferred to the beneficiary's address.
