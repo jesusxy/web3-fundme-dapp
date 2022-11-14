@@ -6,14 +6,23 @@ import CreateFundraiser from './pages/CreateFundraiser';
 import Fundraisers from './pages/Fundraisers';
 import Donate from './pages/Donate';
 import Loader from './components/Loader';
+import useFundraiserContract from './hooks/useFundraiserContract';
 
 import './App.css';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
+  const [fundraisers, setFundraisers] = useState([]);
+  const { provider, signer, fundraiserContract } = useFundraiserContract();
+
+  const fetchFundraisers = async () => {
+    const fundraiserList = await fundraiserContract.getAll();
+    setFundraisers(fundraiserList);
+  }
 
   useEffect(() => {
     setIsLoading(false);
+    fetchFundraisers();
   }, []);
 
 
@@ -28,7 +37,7 @@ function App() {
               <Route exact path="/" element={<Home />}/>
               <Route path="/browse" element={<Fundraisers/>} />
               <Route path="/donate/:fundraiserAddress" element={<Donate />} />
-              <Route path="/create" element={<CreateFundraiser />}/>
+              <Route path="/create" element={<CreateFundraiser updateFundraisers={fetchFundraisers} />}/>
             </Fragment>
           </Routes>
         </div>

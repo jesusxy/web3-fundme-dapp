@@ -17,7 +17,7 @@ function ContextProvider({children}) {
         setProvider(provider);
         setContract(fundraiserContract);
     
-        const fundraiserList = await contract.methods.getAll().call();
+        const fundraiserList = await contract.getAll();
         setFundraisers(fundraiserList);
       } catch(e) {
         alert("Please install Metamask extension to have access to platforms features.");
@@ -29,7 +29,7 @@ function ContextProvider({children}) {
   }, []);
 
   const updateFundraisers = async () => {
-    const fundraiserList = await contract.methods.getAll().call();
+    const fundraiserList = await contract.getAll();
     setFundraisers(fundraiserList);
   }
 

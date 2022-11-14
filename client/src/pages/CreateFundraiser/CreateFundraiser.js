@@ -1,58 +1,67 @@
-import React, { useContext, useState, useEffect } from "react"
-import { useForm } from "react-hook-form"
-import { yupResolver } from "@hookform/resolvers/yup"
-import * as yup from "yup"
+import React, { useContext, useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
-import TxnLoader from "../../components/TxnLoader"
-import '../../styles/CreateFundraiser.scss';
+import useFundraiserContract from "../../hooks/useFundraiserContract";
+import TxnLoader from "../../components/TxnLoader";
+import "../../styles/CreateFundraiser.scss";
 
-import { Contract, errors } from "ethers"
+import { ethers } from "ethers";
 
-const tomorrow = new Date(Date.now() + 86400000)
-tomorrow.setHours(0, 0, 0, 0)
+const tomorrow = new Date(Date.now() + 86400000);
+tomorrow.setHours(0, 0, 0, 0);
 
 const formatDate = (date) => {
-  let dd = date.getDate()
-  let mm = date.getMonth() + 1 //January is 0 so need to add 1 to make it 1!
-  let yyyy = date.getFullYear()
+  let dd = date.getDate();
+  let mm = date.getMonth() + 1; //January is 0 so need to add 1 to make it 1!
+  let yyyy = date.getFullYear();
   if (dd < 10) {
-    dd = "0" + dd
+    dd = "0" + dd;
   }
   if (mm < 10) {
-    mm = "0" + mm
+    mm = "0" + mm;
   }
 
-  return mm + "-" + dd + "-" + yyyy 
-}
+  return mm + "-" + dd + "-" + yyyy;
+};
 
-const CreateFundraiserView = () => {
+const CreateFundraiserView = (props) => {
+  const { provider, signer, fundraiserContract } = useFundraiserContract();
   const [isTxnLoading, setIsTxnLoading] = useState(false);
   // use ethers to convert eth -> wei
-  const toWei = (amount) => {};
+  const toWei = (amount) => ethers.utils.formatEther(amount);
 
   // create data model
   const formSchema = yup.object().shape({
     hostName: yup.string().required().min(3),
     title: yup.string().required().min(3),
     goalAmount: yup.number().typeError("You must specify an amount").required(),
-    expiryDate: yup.date().typeError("You must specify a valid date").required().min(tomorrow, "Expiry Date of the fundraiser should be a later date"),
-    recipientAddress: yup.string().required().test("isAddress", "Enter a valid Ethereum address", function (value) {
-      return 0
-    }),
+    expiryDate: yup
+      .date()
+      .typeError("You must specify a valid date")
+      .required()
+      .min(tomorrow, "Expiry Date of the fundraiser should be a later date"),
+    recipientAddress: yup
+      .string()
+      .required()
+      .test("isAddress", "Enter a valid Ethereum address", function (value) {
+        return ethers.utils.isAddress(value);
+      }),
     description: yup.string().required().min(200),
-  })
+  });
 
   const {
-    register, 
+    register,
     handleSubmit,
     reset,
     formState: { errors, isSubmitSuccessful },
   } = useForm({
     resolver: yupResolver(formSchema),
-  })
+  });
 
   useEffect(() => {
-    if(isSubmitSuccessful){
+    if (isSubmitSuccessful) {
       reset({
         hostName: "",
         title: "",
@@ -60,42 +69,55 @@ const CreateFundraiserView = () => {
         expiryDate: "",
         recipientAddress: "",
         description: "",
-      })
+      });
     }
   }, [isSubmitSuccessful, reset]);
 
   const dateToBigInt = (date) => new Date(date).getTime() / 1000;
   const onCreateSubmit = async (data) => {
-    setIsTxnLoading(true)
+    setIsTxnLoading(true);
     let {
-      goalAmount, 
+      goalAmount,
       expiryDate,
       hostName,
       title,
       description,
-      recipientAddress
+      recipientAddress,
     } = data;
 
     try {
       // call contract method to create a new Fundraiser
-      console.log('____ create fundraiser fired ____', data);
-    } catch(e) {
-      alert(`Transaction error. ${e.message}`)
+      await fundraiserContract.createFundraiser(
+        ethers.utils.formatEther(goalAmount),
+        dateToBigInt(expiryDate),
+        hostName.toString(),
+        title.toString(),
+        description.toString(),
+        recipientAddress.toString()
+      );
+
+      alert(`Transaction successful`)
+      console.log("____ create fundraiser fired ____", data);
+    } catch (e) {
+      alert(`Transaction error. ${e.message}`);
     }
 
     setIsTxnLoading(false);
-    //updateFundraisers();
-  }
+    props.updateFundraisers();
+  };
 
   return (
     <>
-      { isTxnLoading && <TxnLoader /> }
+      {isTxnLoading && <TxnLoader />}
       <div className="CreateFundraiser">
         <section>
           <h1>Create a Fundraiser</h1>
-          <form onSubmit={handleSubmit(onCreateSubmit)} className="CreateFundraiser__form">
+          <form
+            onSubmit={handleSubmit(onCreateSubmit)}
+            className="CreateFundraiser__form"
+          >
             <div className="CreateFundraiser__grid-item CreateFundraiser__hostname">
-              <input 
+              <input
                 type="text"
                 name="hostName"
                 id="hostName"
@@ -105,7 +127,7 @@ const CreateFundraiserView = () => {
               {errors.hostName && <span>{errors.hostName.message}</span>}
             </div>
             <div className="CreateFundraiser__grid-item CreateFundraiser__title">
-              <input 
+              <input
                 type="text"
                 name="title"
                 id="title"
@@ -115,7 +137,7 @@ const CreateFundraiserView = () => {
               {errors.title && <span>{errors.title.message}</span>}
             </div>
             <div className="CreateFundraiser__grid-item CreateFundraiser__goalAmount">
-              <input 
+              <input
                 type="number"
                 name="goalAmount"
                 id="goalAmount"
@@ -125,7 +147,7 @@ const CreateFundraiserView = () => {
               {errors.goalAmount && <span>{errors.goalAmount.message}</span>}
             </div>
             <div className="CreateFundraiser__grid-item CreateFundraiser__date">
-              <input 
+              <input
                 type="date"
                 name="expiryDate"
                 id="expiryDate"
@@ -135,35 +157,35 @@ const CreateFundraiserView = () => {
               {errors.expiryDate && <span>{errors.expiryDate.message}</span>}
             </div>
             <div className="CreateFundraiser__grid-item CreateFundraiser__recipient">
-              <input 
+              <input
                 type="text"
                 name="recipientAddress"
                 id="recipientAddress"
                 placeholder="Recipient Address (ETH)"
                 {...register("recipientAddress")}
               />
-              {errors.recipientAddress && (<span>{errors.recipientAddress.message}</span>)}
+              {errors.recipientAddress && (
+                <span>{errors.recipientAddress.message}</span>
+              )}
             </div>
             <div className="CreateFundraiser__grid-item CreateFundraiser__description">
-              <textarea 
+              <textarea
                 name="description"
                 id="description"
                 rows="4"
                 placeholder="Describe need for the fundraiser in detail.."
                 {...register("description")}
               ></textarea>
-              {errors.description && (
-                <span>{errors.description.message}</span>
-              )}
+              {errors.description && <span>{errors.description.message}</span>}
             </div>
             <div className="CreateFundraiser__submit">
-              <button type="submit" >Create</button>
+              <button type="submit">Create</button>
             </div>
           </form>
         </section>
       </div>
     </>
   );
-}
+};
 
 export default CreateFundraiserView;
