@@ -87,11 +87,11 @@ const CreateFundraiserView = (props) => {
       description,
       recipientAddress,
     } = data;
-
+    
     try {
       // call contract method to create a new Fundraiser
       await fundraiserContract.createFundraiser(
-        ethers.utils.formatEther(goalAmount),
+        ethers.utils.parseUnits(goalAmount.toString(), "ether"),
         dateToBigInt(expiryDate),
         hostName.toString(),
         title.toString(),
